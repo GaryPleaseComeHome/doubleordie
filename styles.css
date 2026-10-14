@@ -418,6 +418,57 @@ a { color: inherit; }
   .live-card { flex-basis: 130px; padding-inline: 14px; }
   .scoreboard-caption { font-size: 9px; }
 
+  /* Mobile keeps desktop's decisive sports hierarchy without amplifying helper copy. */
+  .nav-label,
+  .profile-chip strong,
+  .scoreboard-heading h2,
+  .game-top strong,
+  .wager-select-row select,
+  .bar-row strong,
+  .champion div,
+  .note strong,
+  .legacy-item strong,
+  .saved-item strong,
+  #leaderTable .sticky-name { font-weight: 800; }
+  .eyebrow { font-weight: 900; }
+  .command-copy h2,
+  .section-head h2,
+  .winner-spotlight h2,
+  .panel-head h3,
+  .ticket-sticky h3,
+  .champion-slide h3,
+  .modal-inner .panel-head h3 {
+    font-family: var(--display);
+    font-weight: 900;
+    letter-spacing: -.035em;
+  }
+  .command-stat strong,
+  .metric strong,
+  .winner-score strong,
+  .summary-cell strong,
+  .podium-card .place,
+  .podium-card h3,
+  .podium-card p b,
+  .stat-card strong,
+  .team-btn b {
+    font-family: var(--display);
+    font-weight: 900;
+    letter-spacing: -.035em;
+  }
+  .primary-btn,
+  .secondary-btn,
+  .ghost-btn,
+  .double-btn,
+  .theme-btn,
+  .text-btn,
+  .remaining-wagers button {
+    font-weight: 800;
+    letter-spacing: -.012em;
+  }
+  .team-btn b { font-size: 15px; line-height: 1.14; }
+  .team-btn .team-abbr { font-weight: 900; }
+  #leaderTable .num { font-weight: 900; }
+
   .command-card { padding: 20px 17px 15px; gap: 18px; }
   .command-copy h2 { font-size: 27px; }
   .command-copy .eyebrow { font-size: 9px; }

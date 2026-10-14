@@ -85,18 +85,39 @@ function initFootballs(){
       }
       lace.setAttribute('d', d);
     }
-    let frame = 0, started = 0;
-    const engaged = () => !reduced.matches && !document.hidden && ((hover.matches && button.matches(':hover')) || button.matches(':focus-visible'));
+    let frame = 0, started = 0, tapUntil = 0, touchTapArmed = false;
+    const tapDuration = 720;
+    const continuousEngaged = () => (hover.matches && button.matches(':hover')) || button.matches(':focus-visible');
+    const engaged = (now=performance.now()) => !reduced.matches && !document.hidden && (continuousEngaged() || now < tapUntil);
     function tick(now){
-      if(!engaged()){ frame=0; draw(restAngle); return; }
-      draw(restAngle + (now-started)*Math.PI*2/950);
+      if(!engaged(now)){ frame=0; tapUntil=0; draw(restAngle); return; }
+      if(now < tapUntil){
+        const progress = Math.min(1, (now-started)/tapDuration);
+        const eased = 1 - (1-progress)**2;
+        draw(restAngle + eased*Math.PI*4);
+      } else draw(restAngle + (now-started)*Math.PI*2/950);
       frame=requestAnimationFrame(tick);
     }
     function update(){
+      if(reduced.matches || document.hidden) tapUntil=0;
       if(engaged() && !frame){ started=performance.now(); frame=requestAnimationFrame(tick); }
       else if(!engaged()){ cancelAnimationFrame(frame); frame=0; draw(restAngle); }
     }
+    function startTapSpiral(){
+      if(hover.matches || reduced.matches || document.hidden) return;
+      started=performance.now(); tapUntil=started+tapDuration;
+      cancelAnimationFrame(frame);
+      draw(restAngle);
+      frame=requestAnimationFrame(tick);
+    }
     ['pointerenter','pointerleave','focus','blur'].forEach(type=>button.addEventListener(type,update));
+    button.addEventListener('pointerdown', event => { touchTapArmed=event.pointerType==='touch'; }, {passive:true});
+    button.addEventListener('pointercancel', () => { touchTapArmed=false; }, {passive:true});
+    button.addEventListener('click', event => {
+      const isTouchTap = event.pointerType==='touch' || touchTapArmed;
+      touchTapArmed=false;
+      if(isTouchTap) startTapSpiral();
+    });
     reduced.addEventListener('change',update);
     document.addEventListener('visibilitychange',update);
     draw(restAngle);
