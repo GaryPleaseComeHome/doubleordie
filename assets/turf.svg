@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 960">
+  <defs>
+    <pattern id="grass" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M1 0v2M4 3v1" stroke="#a4c49b" stroke-opacity=".06"/></pattern>
+    <pattern id="yards" width="1200" height="120" patternUnits="userSpaceOnUse"><path d="M48 0H1152" stroke="#d5e9d2" stroke-width="2" stroke-opacity=".10"/><path d="M48 24h15m-15 24h15m-15 24h15m-15 24h15M1137 24h15m-15 24h15m-15 24h15m-15 24h15M450 24h12m-12 24h12m-12 24h12m-12 24h12M738 24h12m-12 24h12m-12 24h12m-12 24h12" stroke="#d5e9d2" stroke-width="2" stroke-opacity=".11"/></pattern>
+  </defs>
+  <rect width="1200" height="960" fill="url(#grass)"/>
+  <path d="M48 0v960M1152 0v960" stroke="#d5e9d2" stroke-width="2" stroke-opacity=".12"/>
+  <rect y="120" width="1200" height="720" fill="url(#yards)"/>
+  <g fill="none" stroke="#e8e03c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".13"><path d="M563 24v57h74V24M600 81v29"/><path d="M563 936v-57h74v57M600 879v-29"/></g>
+</svg>

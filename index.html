@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Double or Die football pool. Pick the spread, rank your confidence, and double one game." />
+  <title>Double or Die — Football Pool</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fffc01'/%3E%3Ctext x='7' y='45' font-family='Arial' font-weight='900' font-size='37'%3E2X%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css?v=polish-sports-20261006-1" />
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">Skip to content</a>
+  <div class="field-art" aria-hidden="true"></div>
+  <div class="app-shell">
+    <aside class="side-rail" aria-label="Primary navigation">
+      <button class="brand-mark" data-tab="home" aria-label="Double or Die home"><span>2X</span></button>
+      <nav class="rail-nav" aria-label="Pool sections">
+        <button class="rail-btn active" data-tab="home" aria-current="page" type="button"><span class="nav-label">Home</span></button>
+        <button class="rail-btn" data-tab="picks" type="button"><span class="nav-label">Picks</span></button>
+        <button class="rail-btn" data-tab="leaderboard" type="button" aria-label="Leaderboard"><span class="nav-label">Board</span></button>
+        <button class="rail-btn" data-tab="stats" type="button"><span class="nav-label">Stats</span></button>
+        <button class="rail-btn" data-tab="history" type="button"><span class="nav-label">History</span></button>
+      </nav>
+      <div class="rail-caption" aria-hidden="true">ONE GAME.<br>DOUBLE IT.</div>
+    </aside>
+
+    <main class="main-stage" id="mainContent" tabindex="-1">
+      <header class="topbar">
+        <div class="brand-title">
+          <p class="eyebrow">Who's your double?</p>
+          <h1>Double <span>or Die</span><span class="mobile-mark" aria-hidden="true">2X</span></h1>
+        </div>
+        <div class="top-actions">
+          <button class="theme-btn" id="themeToggle" type="button" aria-label="Toggle light or dark mode"><span>☀ Light</span></button>
+          <button class="ghost-btn" id="rulesBtn" type="button">Rules</button>
+          <button class="profile-chip" id="profileBtn" type="button" aria-label="Edit player profile">
+            <img id="topAvatar" alt="" />
+            <span><strong id="topUser">Guest</strong><small>Player profile <span aria-hidden="true">⌄</span></small></span>
+          </button>
+        </div>
+      </header>
+
+      <section id="tab-home" class="tab-panel active" aria-label="Pool dashboard">
+        <section class="live-score-section is-compact" aria-label="Current NFL scoreboard">
+          <div class="scoreboard-heading"><h2>NFL scoreboard</h2><span id="liveScoreStatus" role="status">Loading…</span></div>
+          <div class="live-score-grid" id="liveScoreGrid" tabindex="-1" role="region" aria-label="Current scores, scroll horizontally" hidden></div>
+          <p class="scoreboard-caption">Current NFL feed · separate from your Week 3 pool card</p>
+        </section>
+        <article class="command-card" id="weekCommandCard"></article>
+        <div class="metric-grid" id="homeMetrics" aria-label="Your season snapshot"></div>
+        <div class="home-grid">
+          <article class="panel standings-preview" id="heroLeaderCard"></article>
+          <div class="home-sidebar">
+            <section class="last-week-winner" id="lastWeekWinner" aria-label="Last week winner"></section>
+            <article class="panel pool-brief">
+              <div class="panel-head"><h3>A perfect week</h3><span>152 pts</span></div>
+              <p>16 picks. Every confidence value, once. One game with twice as much on the line.</p>
+              <button class="text-btn" type="button" data-open-rules>How scoring works <span aria-hidden="true">↗</span></button>
+            </article>
+          </div>
+        </div>
+        <div class="home-bottom">
+          <article class="panel commissioner-panel">
+            <div class="panel-head"><h3>From the commissioner</h3><span>Week 3</span></div>
+            <div class="note-stack">
+              <div class="note"><strong>The Week 3 sheet</strong><span>16 games. Pick against the listed spread; lines lock at kickoff.</span></div>
+              <div class="note"><strong>The score to beat</strong><span>No perfect 152-point week in the archive.</span></div>
+            </div>
+          </article>
+          <article class="panel tools-panel"><div class="panel-head"><h3>Around the pool</h3></div><div class="legacy-list" id="legacyList"></div></article>
+        </div>
+      </section>
+
+      <section id="tab-picks" class="tab-panel" aria-label="Week 3 picks">
+        <div class="section-head">
+          <div><p class="eyebrow">Week 03 · Confidence pool</p><h2>Your pick sheet</h2><p>Pick the spread. Use 1–16 once each. Double one game.</p></div>
+          <div class="head-actions"><button class="secondary-btn" id="autoPickBtn" type="button">Random fill</button><button class="ghost-btn" id="resetPicksBtn" type="button">Reset</button><button class="primary-btn" id="submitPicksBtn" type="button">Save Week 3 picks</button></div>
+        </div>
+        <div class="mobile-pick-progress" id="mobilePickProgress" aria-label="Pick sheet progress">
+          <div id="mobilePickStatus" role="status" aria-live="polite"></div>
+          <a class="secondary-btn" id="reviewTicketLink" href="#ticketPanel">Review ticket <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="pick-summary" id="pickSummary" aria-live="polite"></div>
+        <div class="remaining-wagers" id="remainingWagers" aria-live="polite"></div>
+        <div class="pick-layout">
+          <div class="games-grid" id="gamesGrid"></div>
+          <aside class="ticket-panel" aria-label="Your pick ticket"><div class="ticket-sticky" id="ticketPanel" tabindex="-1"></div></aside>
+        </div>
+      </section>
+
+      <section id="tab-leaderboard" class="tab-panel" aria-label="Leaderboard">
+        <div class="section-head">
+          <div><p class="eyebrow">The season race</p><h2>Leaderboard</h2><p>Every point counts. Follow the leaders or inspect a weekly card.</p></div>
+          <div class="toolbar"><label><span class="sr-only">Search player</span><input id="leaderSearch" placeholder="Search player…" type="search"></label><label><span class="sr-only">Leaderboard view</span><select id="leaderMode"><option value="season">Season total</option><option value="week2">Week 2 matrix</option><option value="week1">Week 1 matrix</option></select></label></div>
+        </div>
+        <div class="podium" id="podium"></div>
+        <div class="leader-summary" id="leaderSummary"></div>
+        <div class="matrix-legend" id="matrixLegend" hidden><span><i class="ok"></i> Correct</span><span><i class="bad"></i> Wrong</span><span><i class="dbl"></i> Double</span></div>
+        <div class="table-caption">Select a player for stats <span>Scroll table for more columns →</span></div>
+        <div class="table-card" tabindex="0" role="region" aria-label="Standings table, scroll for more columns"><table id="leaderTable"></table></div>
+      </section>
+
+      <section id="tab-stats" class="tab-panel" aria-label="Player statistics">
+        <div class="section-head">
+          <div><p class="eyebrow">Inside the numbers</p><h2>Player stats</h2><p>Your results, your tendencies, your competition.</p></div>
+          <div class="toolbar stats-toolbar"><label>Player<select id="statsPlayer"></select></label><label>Compare with<select id="statsCompare"></select></label></div>
+        </div>
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="two-col">
+          <article class="panel"><div class="panel-head"><h3>Most picked teams</h3><span>Graded weeks</span></div><div id="teamBars" class="bar-stack"></div></article>
+          <article class="panel"><div class="panel-head"><h3>Head to head</h3><span>Comparison</span></div><div id="h2hPanel" class="compare-panel"></div></article>
+        </div>
+      </section>
+
+      <section id="tab-history" class="tab-panel" aria-label="Pool history">
+        <div class="section-head"><div><p class="eyebrow">The archive · 2007—2025</p><h2>Hall of champions</h2><p>The names that finished on top.</p></div></div>
+        <div class="champions-stage" id="championsStage" tabindex="0" role="region" aria-label="Recent champions, scroll horizontally"></div>
+        <div class="two-col wide-left"><article class="panel"><div class="panel-head"><h3>Champion archive</h3><span>Every season</span></div><div id="championsGrid" class="champion-grid"></div></article><article class="panel"><div class="panel-head"><h3>Saved picks</h3><span>Your profile</span></div><div id="savedWeeks" class="saved-list"></div></article></div>
+      </section>
+      <footer class="site-footer"><span>DOUBLE OR DIE</span><span>Pick smart. Double down.</span></footer>
+    </main>
+  </div>
+
+  <dialog id="profileDialog" class="modal-card" aria-labelledby="profileTitle">
+    <form method="dialog" class="modal-inner" id="profileForm">
+      <div class="panel-head"><h3 id="profileTitle">Your player profile</h3><button class="ghost-btn" value="cancel" type="submit">Close</button></div>
+      <p class="muted">Choose your player and make it yours.</p>
+      <label>Player<select id="profilePlayer"></select></label>
+      <label>Display name<input id="profileName" placeholder="Your name" maxlength="60"></label>
+      <label>Avatar<input id="avatarUpload" type="file" accept="image/*"></label>
+      <div class="profile-save"><img id="avatarPreview" class="avatar-preview" alt="Avatar preview"><button class="primary-btn" id="saveProfileBtn" value="default" type="button">Save profile</button></div>
+    </form>
+  </dialog>
+  <dialog id="rulesDialog" class="modal-card" aria-labelledby="rulesTitle">
+    <form method="dialog" class="modal-inner">
+      <div class="panel-head"><h3 id="rulesTitle">The rules</h3><button class="ghost-btn" type="submit">Close</button></div>
+      <p class="rules-intro">16 games. One double. Everything to play for.</p>
+      <ol class="rules-list">
+        <li><strong>Pick the spread.</strong> Choose one team in every NFL game against the listed line.</li>
+        <li><strong>Rank your confidence.</strong> Use each value from 1–16 exactly once.</li>
+        <li><strong>Double one.</strong> Your 2X game doubles the points for a win and the penalty for a loss.</li>
+        <li><strong>Make every point count.</strong> Wrong picks subtract the assigned value. The maximum weekly score is 152.</li>
+      </ol>
+      <p class="rules-lock">Saving locks your card. Review all picks before confirming; contact the commissioner if a correction is needed afterward.</p>
+    </form>
+  </dialog>
+
+  <!-- The solid leather body never transforms. JS projects its surface around X. -->
+  <template id="footballTemplate">
+    <svg class="football-art" viewBox="0 0 168 92" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="leather" x1="0" y1="0" x2="0.2" y2="1"><stop stop-color="#c17b48"/><stop offset=".4" stop-color="#995026"/><stop offset=".72" stop-color="#703215"/><stop offset="1" stop-color="#3e1c0e"/></linearGradient>
+        <radialGradient id="shine" cx=".38" cy=".28" r=".7"><stop stop-color="#f5c88b" stop-opacity=".26"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+        <linearGradient id="stripe" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d5c8ae"/><stop offset=".35" stop-color="#fff4df"/><stop offset="1" stop-color="#a38d6d"/></linearGradient>
+        <clipPath id="ballClip"><path d="M6 46 Q84 -26 162 46 Q84 118 6 46Z"/></clipPath>
+      </defs>
+      <path class="football-body" d="M6 46 Q84 -26 162 46 Q84 118 6 46Z" fill="url(#leather)" stroke="#180c06" stroke-width="3" stroke-linejoin="round"/>
+      <g clip-path="url(#ballClip)">
+        <g class="football-grain" fill="#210d05"></g>
+        <path d="M29 0 Q42 46 29 92H37 Q50 46 37 0Z M139 0 Q126 46 139 92H131 Q118 46 131 0Z" fill="url(#stripe)"/>
+        <g class="football-seams" fill="none" stroke="#3d1a0b" stroke-width="1.5"></g>
+        <path class="football-laces" fill="none" stroke="#fff6e5" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 46 Q84 -26 162 46 Q84 118 6 46Z" fill="url(#shine)"/>
+      </g>
+      <path d="M6 46 Q84 -26 162 46 Q84 118 6 46Z" fill="none" stroke="#180c06" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+  </template>
+  <script src="data.js?v=polish-sports-20261006-1"></script>
+  <script src="app.js?v=polish-sports-20261006-1"></script>
+</body>
+</html>

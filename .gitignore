@@ -1,0 +1,8 @@
+qa/
+critic_round3_screens/
+*.bak
+__pycache__/
+*.pyc
+_site/
+.DS_Store
+Thumbs.db
